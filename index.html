@@ -1,0 +1,737 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Wennie's Resume</title>
+
+
+  <style>
+    /* body 樣式 */
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+    }
+
+    a {
+      text-decoration: none;
+      color: #333;
+    }
+
+    /* 分隔線樣式 */
+    hr {
+      border: 0;
+      border-top: 1px solid #ccc;
+      margin: 20px 0;
+    }
+
+    /* header 樣式 */
+    header {
+      /* background-color: #333; */
+      color: #fff;
+    }
+
+    li {
+      color: #666;
+    }
+
+    /* header 底下全螢幕樣式 */
+    .fullscreen-container {
+      width: 100vw;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      text-align: center;
+      position: relative;
+      /* 添加相對定位，以便容納背景圖和遮罩 */
+    }
+
+    /* 滿寬背景圖 */
+    .fullscreen-container::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-image: url(images/logan.jpg);
+      background-size: cover;
+      background-position: center;
+      z-index: -1;
+      /* 將背景圖層設置在最底層 */
+    }
+
+    /* 黑色遮罩 */
+    /* 黑色遮罩 */
+    .fullscreen-container::after {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.65);
+      /* 設置黑色遮罩的顏色和透明度 */
+      z-index: -1;
+      /* 將遮罩層設置在背景圖層之上但仍然在容器內 */
+      background-image: linear-gradient(45deg, rgba(255, 255, 255, 0.1) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, 0.1) 50%, rgba(255, 255, 255, 0.1) 75%, transparent 75%, transparent);
+      /* 添加斜條紋的背景圖片 */
+      background-size: 3px 3px;
+      /* 調整斜條紋的大小 */
+    }
+
+    .move-down {
+      transform: translateY(60px);
+    }
+
+    .pointer {
+      cursor: pointer;
+    }
+
+
+    /* 卡片樣式 */
+    .card {
+      background-color: #ffffff;
+      border-radius: 5px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+      margin: 20px;
+      padding: 20px;
+      width: 80%;
+    }
+
+
+    /* 描述文字樣式 */
+    .description {
+      color: #666;
+    }
+
+    /* 頁尾樣式 */
+    footer {
+      background-color: #f2f2f2;
+      color: #666;
+      font-size: small;
+      padding: 10px;
+      text-align: center;
+      width: 100%;
+    }
+
+    /* 關於我區塊樣式 */
+    .about-section {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .about-section .profile-image {
+      min-width: 200px;
+      width: 200px;
+      height: 200px;
+      border-radius: 50%;
+      overflow: hidden;
+      border: 3px solid linear-gradient(to right, red, purple);
+    }
+
+    .about-section .profile-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .about-section .profile-content {
+      flex-grow: 1;
+      margin-left: 20px;
+    }
+
+    /* Timeline 樣式 */
+    .timeline-card {
+      position: relative;
+      margin-left: 16px;
+    }
+
+    .timeline-card:before {
+      content: '';
+      display: inline-block;
+      position: absolute;
+      background-color: #fff;
+      border-radius: 100%;
+      width: 16px;
+      height: 16px;
+      top: 16px;
+      left: -12px;
+      border: 5px solid;
+      z-index: 2;
+    }
+
+    .timeline-body {
+      border-left: 2px solid #E6E9ED;
+    }
+
+    .timeline-card-info:before {
+      border-color: orchid;
+    }
+
+    .info-card-container {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+    }
+
+    .info-content {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 0 10px;
+    }
+
+    .px-4 {
+      padding-left: 1.5rem;
+      padding-right: 1.5rem;
+    }
+
+    .pt-3 {
+      padding-top: 1rem;
+    }
+
+    .pb-4 {
+      padding-bottom: 1.5rem;
+    }
+
+    .h5,
+    .h6 {
+      margin-top: 0;
+      margin-bottom: 0.5rem;
+      font-weight: 500;
+      line-height: 1.2
+    }
+
+    .h5 {
+      font-size: 1.25rem;
+    }
+
+    .h6 {
+      font-size: 1rem;
+    }
+
+    .w-20 {
+      width: 40%;
+    }
+
+    .mt-20 {
+      margin-top: 10rem;
+    }
+
+    .pt-20 {
+      padding-top: 10rem;
+    }
+
+    .mt-10 {
+      margin-top: 2rem;
+    }
+
+    .mt-10 {
+      margin-top: 2rem;
+    }
+
+    .mb-3 {
+      margin-bottom: 0.5rem;
+    }
+
+    .text-small {
+      font-size: 0.8rem;
+    }
+
+    .right-border {
+      border-right: 1px solid #ccc;
+    }
+
+    .count-number {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      font-size: 2rem;
+      font-weight: 600;
+      color: orchid;
+    }
+
+    
+
+    /* 在螢幕寬度小於 768px 時，套用的樣式 */
+    @media (max-width: 767px) {
+      .profile-content > h3 {
+      text-align: center;
+    }
+      .about-section {
+        flex-direction: column;
+      }
+
+      .about-section .profile-image {
+        margin-bottom: 20px;
+      }
+
+      .about-section .profile-content {
+        align-items: center;
+        justify-content: center;
+        margin-left: 0px;
+      }
+    }
+
+    @media (max-width: 1180px) {
+      .info-card-container {
+        flex-direction: column;
+      }
+
+      .border-bottom {
+        border-bottom: 1px solid #ccc;
+      }
+
+      .info-content {
+        border-right: none;
+        padding-bottom: 1rem;
+        margin-top: 1rem;
+      }
+
+      .right-bottom {
+        border-bottom: 1px solid #ccc;
+      }
+    }
+
+    /* 在螢幕寬度大於等於 768px 時，套用的樣式 */
+    @media (min-width: 768px) {
+      body {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+    }
+
+
+    @keyframes countAnimation {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .count-number {
+      animation: countAnimation 2s ease-out;
+    }
+  </style>
+</head>
+
+<body>
+  <header class="fullscreen-container">
+    <h1>Hello There.</h1>
+    <p>Nice to meet you!</p>
+    <svg id="scrollDown" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="white"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+      class="feather feather-arrow-down-circle pointer move-down" width="36" height="36">
+      <circle cx="12" cy="12" r="10" />
+      <path d="M8 10l4 4 4-4">
+        <animateTransform attributeName="transform" type="translate" values="0 0; 0 2; 0 0" dur="1s"
+          repeatCount="indefinite" />
+      </path>
+    </svg>
+  </header>
+
+  <div class="card" id="secondScreen">
+    <h2>About me</h2>
+    <hr>
+    <section class="about-section">
+      <div class="profile-image">
+        <img src="images/selfie.jpg" alt="Profile Image">
+      </div>
+      <div class="profile-content">
+        <h3>Wennie Tung 董怡均</h3>
+        <p class="description">
+          過去在數位廣告業擔任公司與客戶之間的溝通橋樑，這段經驗讓我經常與前端工程師合作解決廣告版位樣式的問題。這使我對前端產生了濃厚的好奇心，我開始在空閒時間私下學習前端相關知識，逐漸培養了對前端的興趣。</p>
+        <p class="description">進入現在的公司後，需要花更多的時間整理客戶的需求，在與工程師討論的過程中讓我更發現自己對前端的熱忱，並希望能更積極地參與其中。因此，我開始透過網路自學前端課程，期待轉職成為一位前端工程師。</p>
+      </div>
+    </section>
+  </div>
+
+  <section class="card">
+    <h2>Work experience</h2>
+    <hr>
+    <div class="timeline">
+      <!-- timeline-card Start-->
+      <div class="timeline-card timeline-card-info">
+        <div class="timeline-head px-4 pt-3">
+          <div class="h5">Account Manager</div>
+        </div>
+        <div class="timeline-body px-4 pb-4">
+          <div class="description h6">Ocard 奧理科技</div>
+          <div class="description text-small mb-3">Feb, 2022 - Present</div>
+          <div>
+            <div>【客戶關係維護】</div>
+            <ul>
+              <li>維護及管理 100 間以上客戶關係</li>
+              <li>負責建置會員系統，手把手教學客戶靈活運用系統後台及前台</li>
+              <li>根據客戶性質及數據，分析並提出會員經營策略及行銷建議</li>
+              <li>蒐集客戶意見及回饋，整理後提供給內部技術支援團隊</li>
+              <li>Upsell適合客戶的相關服務，創造更多合作機會</li>
+              <li>與行銷部門協作，準備行銷相關活動</li>
+              <li>公關危機處理</li>
+            </ul>
+            <div>【產品營運】</div>
+            <ul>
+              <li>統整各客戶提出的需求，提出相對應解法</li>
+              <li>與工程團隊討論及評估系統功能優化方向</li>
+              <li>系統 bug 排查協助</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <!-- timeline-card End-->
+
+      <!-- timeline-card Start-->
+      <div class="timeline-card timeline-card-info">
+        <div class="timeline-head px-4 pt-3">
+          <div class="h5">Business Development Specialist</div>
+        </div>
+        <div class="timeline-body px-4 pb-4">
+          <div class="description h6">TenMax 騰學廣告科技</div>
+          <div class="description text-small mb-3">2 years</div>
+          <div>
+            <div>【客戶關係維護】</div>
+            <ul>
+              <li>維護及管理 50 家以上的媒體合作關係，客戶續留率 90% 以上</li>
+              <li>負責建立數位廣告版位，與客戶溝通設定細節</li>
+              <li>提供客戶效益最大化之流量優化策略，使客戶廣告營收成長</li>
+              <li>協助客戶熟悉公司系統，確保客戶能充分運用公司產品</li>
+              <li>廣告版位異常排查與處理</li>
+              <li>疑難雜症解惑說明</li>
+            </ul>
+            <div>【商業開發】</div>
+            <ul>
+              <li>每季開發 3 家以上新媒體流量合作關係，負責開發之目標流量每季皆達成季目標，最高單月流量成長 30 倍</li>
+              <li>客戶拜訪、客製化簡報提案，產品推廣成功率 85% 以上</li>
+              <li>廣告產品簡報製作與報表數據分析</li>
+              <li>合約條款溝通與簽訂</li>
+            </ul>
+            <div>【產品管理與營運】</div>
+            <ul>
+              <li>負責新廣告版位、新廣告產品測試工作</li>
+              <li>提出系統優化建議，發想改善方向</li>
+              <li>新產品客戶意見搜集及分析，並與工程師溝通討論，評估新產品發展方向</li>
+              <li>規劃新產品上線順序及協助客戶放置廣告代碼，並追蹤數據成效</li>
+              <li>分析新產品上線後數據表現，評估新產品成效</li>
+              <li>參與 Scrum 開發流程</li>
+              <li>使用 Kanban 管理開發流程</li>
+              <li>參與 Retrospective 共同討論改善工作流程</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <!-- timeline-card End-->
+
+      <!-- timeline-card Start-->
+      <div class="timeline-card timeline-card-info">
+        <div class="timeline-head px-4 pt-3">
+          <div class="h5">Intern</div>
+        </div>
+        <div class="timeline-body px-4 pb-4">
+          <div class="description h6">EeLin Entertainment 伊林娛樂</div>
+          <div class="description text-small mb-3">6 months</div>
+          <div>
+            <ul>
+              <li>協助歌手行程安排：負責協助音樂部門的歌手安排行程，包括場地預訂、時程控制等，確保行程順利進行並符合歌手需求。</li>
+              <li>剪接宣傳影片：運用剪接技巧，負責剪輯宣傳影片，包括音樂宣傳片、演唱會片段等，以呈現歌手的魅力和個人風格，增加宣傳效果和觀眾吸引力。</li>
+              <li>現場MV拍攝：協助組織和執行現場音樂錄影帶拍攝工作，包括場地佈置、攝影器材準備、陪伴歌手演練等，確保拍攝過程順利進行並達到預期效果。</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <!-- timeline-card End-->
+
+      <!-- timeline-card Start-->
+      <div class="timeline-card timeline-card-info">
+        <div class="timeline-head px-4 pt-3">
+          <div class="h5">Intern</div>
+        </div>
+        <div class="timeline-body px-4 pb-4">
+          <div class="description h6">TVBS 聯利媒體</div>
+          <div class="description text-small mb-3">1 years</div>
+          <div>
+            <ul>
+              <li>專業剪輯節目影片精華：負責以專業剪輯技巧，提取並精煉節目內容，突顯精華片段，以吸引觀眾注意力和增加節目影片的吸引力。</li>
+              <li>製作精準字幕和特效：運用專業的技術和創意，為節目影片添加準確且引人注目的字幕，使觀眾能夠更清晰地理解內容。同時，精心添加特效以提升影片的視覺效果和吸引力。</li>
+              <li>整合影片至Youtube平台：負責將經過剪輯、字幕和特效處理的節目影片順利上傳至Youtube平台，以擴大觀眾群眾，提高節目的曝光率和觀看量。觀看次數獲全組第一。</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <!-- timeline-card End-->
+
+    </div>
+  </section>
+
+  <section class="card">
+    <h2>Check out of my works</h2>
+    <hr>
+    <p class="description">
+      過去在數位廣告業擔任公司與客戶之間的溝通橋樑，這段經驗讓我經常與前端工程師合作解決廣告版位樣式的問題。這使我對前端產生了濃厚的好奇心，我開始在空閒時間私下學習前端相關知識，逐漸培養了對前端的興趣。</br>
+      進入現在的公司後，需要花更多的時間整理客戶的需求，在與工程師討論的過程中讓我更發現自己對前端的熱忱，並希望能更積極地參與其中。因此，我開始透過網路自學前端課程，期待轉職成為一位前端工程師。</p>
+
+    <p class="description">
+      過去在數位廣告業擔任公司與客戶之間的溝通橋樑，這段經驗讓我經常與前端工程師合作解決廣告版位樣式的問題。這使我對前端產生了濃厚的好奇心，我開始在空閒時間私下學習前端相關知識，逐漸培養了對前端的興趣。</br>
+      進入現在的公司後，需要花更多的時間整理客戶的需求，在與工程師討論的過程中讓我更發現自己對前端的熱忱，並希望能更積極地參與其中。因此，我開始透過網路自學前端課程，期待轉職成為一位前端工程師。</p>
+
+    <!-- info-card Start-->
+    <div class="info-card-container mt-10">
+      <div class="info-content right-border right-bottom">
+        <div class="info-card-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" width="100px" height="100px" viewBox="0 0 24 24">
+            <g opacity="0.4">
+              <path
+                d="M9.5 13.7502C9.5 14.7202 10.25 15.5002 11.17 15.5002H13.05C13.85 15.5002 14.5 14.8202 14.5 13.9702C14.5 13.0602 14.1 12.7302 13.51 12.5202L10.5 11.4702C9.91 11.2602 9.51001 10.9402 9.51001 10.0202C9.51001 9.18023 10.16 8.49023 10.96 8.49023H12.84C13.76 8.49023 14.51 9.27023 14.51 10.2402"
+                stroke="orchid" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+              <path d="M12 7.5V16.5" stroke="orchid" stroke-width="1.5" stroke-linecap="round"
+                stroke-linejoin="round" />
+            </g>
+            <path d="M22 12C22 17.52 17.52 22 12 22C6.48 22 2 17.52 2 12C2 6.48 6.48 2 12 2" stroke="orchid"
+              stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+            <path d="M17 3V7H21" stroke="orchid" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+            <path d="M22 2L17 7" stroke="orchid" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+          </svg>
+          <!-- <svg xmlns="http://www.w3.org/2000/svg" fill="orchid" width="100px" height="100px" viewBox="0 0 100 100">
+
+            <g>
+
+              <circle cx="41.37" cy="26.44" r="6.32" />
+
+              <circle cx="58.63" cy="26.43" r="6.32" />
+
+              <circle cx="28.4" cy="41.16" r="8" />
+
+              <circle cx="71.81" cy="41.16" r="8" />
+
+              <circle cx="50.11" cy="45.73" r="8" />
+
+              <path
+                d="m59.14 80a4.18 4.18 0 0 0 3.2-1.37 4.57 4.57 0 0 0 1.37-3.2v-10.28a6.88 6.88 0 0 0 -6.86-6.86h-13.7a6.88 6.88 0 0 0 -6.86 6.86v10.28a4.68 4.68 0 0 0 4.57 4.57z" />
+
+              <path
+                d="m29.32 75.43v-10.28a13.41 13.41 0 0 1 3.89-9.48 1.18 1.18 0 0 0 0-1.67 1.15 1.15 0 0 0 -.77-.33h-11a6.88 6.88 0 0 0 -6.86 6.86v10.33a4.68 4.68 0 0 0 4.57 4.57z" />
+
+              <path
+                d="m80.85 75.43a4.18 4.18 0 0 0 3.2-1.37 4.57 4.57 0 0 0 1.37-3.2v-10.28a6.88 6.88 0 0 0 -6.86-6.86h-11a1.14 1.14 0 0 0 -.8 2 13.68 13.68 0 0 1 3.89 9.48v10.23z" />
+
+            </g>
+
+          </svg> -->
+        </div>
+        <div class="info-card-description">
+          <h3>Contract value</h3>
+          <h1 class="count-number">7000000</h1>
+          <p class="description">Responsible for contract values exceeding about 7 million.</p>
+        </div>
+      </div>
+
+      <!-- info-card End-->
+
+      <!-- info-card Start-->
+      <div class="info-content right-border right-bottom">
+        <div class="info-card-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" width="100px"
+            height="100px" viewBox="0 0 32 32" xml:space="preserve">
+            <style type="text/css">
+              .feather_een {
+                fill: orchid;
+              }
+
+              .st0 {
+                fill: orchid;
+              }
+            </style>
+            <path class="feather_een"
+              d="M8,25h6c0.552,0,1-0.448,1-1v-4c0-0.552-0.448-1-1-1H8c-0.552,0-1,0.448-1,1v4C7,24.552,7.448,25,8,25z   M8,20h6v4H8V20z M29.213,6.77C29.093,5.207,27.79,4,26.222,4H5.778C4.21,4,2.907,5.207,2.787,6.77l-0.634,8.238  C2.071,16.083,2.92,17,3.998,17H4v8c0,1.657,1.343,3,3,3h18c1.657,0,3-1.343,3-3v-8h0.002c1.078,0,1.927-0.917,1.845-1.992  L29.213,6.77z M24,16V5h2v11H24z M6,5h2v11H6V5z M9,5h2v11H9V5z M12,5h2v11h-2V5z M15,5h2v11h-2V5z M18,5h2v11h-2V5z M21,5h2v11h-2  V5z M4.16,16c-0.583,0-1.042-0.496-0.997-1.077l0.621-8.077C3.843,6.08,4.331,5.445,5,5.161V16H4.16z M23,27h-4v-7h4V27z M27,25  c0,1.105-0.895,2-2,2h-1v-7c0-0.552-0.448-1-1-1h-4c-0.552,0-1,0.448-1,1v7H7c-1.105,0-2-0.895-2-2v-8h22V25z M27.84,16H27V5.161  c0.669,0.284,1.157,0.919,1.216,1.686l0.621,8.077C28.882,15.504,28.423,16,27.84,16z" />
+          </svg>
+        </div>
+        <div class="info-card-content">
+          <h3>Brands</h3>
+          <h1 class="count-number">128</h1>
+          <p class="description">Maintaining relationships with over 100 brand partnerships.</p>
+        </div>
+      </div>
+      <!-- info-card End-->
+
+      <!-- info-card Start-->
+      <div class="info-content right-border right-bottom">
+        <div class="info-card-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" fill="#000000"
+            version="1.1" width="100px" height="100px" viewBox="0 0 64 64" enable-background="new 0 0 64 64"
+            xml:space="preserve">
+            <g stroke-width="0.5" fill="orchid">
+              <path
+                d="M62,5H2C0.896,5,0,5.896,0,7v50c0,1.104,0.896,2,2,2h60c1.104,0,2-0.896,2-2V7C64,5.896,63.104,5,62,5z M60,9v8H4V9H60z    M4,55V21h56v34H4z" />
+              <path
+                d="M10,15c0.52,0,1.04-0.21,1.41-0.59C11.79,14.04,12,13.52,12,13s-0.21-1.04-0.59-1.42c-0.74-0.74-2.08-0.74-2.83,0.01   C8.21,11.96,8,12.47,8,13c0,0.53,0.21,1.04,0.59,1.42C8.96,14.79,9.479,15,10,15z" />
+              <path
+                d="M16,15c0.52,0,1.04-0.21,1.42-0.59C17.79,14.04,18,13.52,18,13s-0.21-1.04-0.59-1.42c-0.74-0.74-2.08-0.74-2.83,0.01   C14.21,11.96,14,12.48,14,13s0.21,1.04,0.59,1.42C14.96,14.79,15.479,15,16,15z" />
+              <path
+                d="M22,15c0.53,0,1.04-0.21,1.41-0.59C23.79,14.04,24,13.53,24,13c0-0.52-0.21-1.04-0.59-1.42c-0.74-0.74-2.08-0.74-2.83,0.01   C20.21,11.96,20,12.48,20,13c0,0.53,0.21,1.04,0.59,1.41C20.96,14.79,21.479,15,22,15z" />
+              <path d="M31,25H10c-1.104,0-2,0.896-2,2s0.896,2,2,2h21c1.104,0,2-0.896,2-2S32.104,25,31,25z" />
+              <path d="M31,33H10c-1.104,0-2,0.896-2,2s0.896,2,2,2h21c1.104,0,2-0.896,2-2S32.104,33,31,33z" />
+              <path d="M31,41H10c-1.104,0-2,0.896-2,2s0.896,2,2,2h21c1.104,0,2-0.896,2-2S32.104,41,31,41z" />
+              <path
+                d="M54,25H39c-1.104,0-2,0.896-2,2v16c0,1.104,0.896,2,2,2h15c1.104,0,2-0.896,2-2V27C56,25.896,55.104,25,54,25z M52,41H41   V29h11V41z" />
+            </g>
+          </svg>
+        </div>
+        <div class="info-card-content">
+          <h3>Publishers</h3>
+          <h1 class="count-number">57</h1>
+          <p class="description">Established and maintained partnerships with over 50 media websites.</p>
+        </div>
+      </div>
+      <!-- info-card End-->
+
+      <!-- info-card Start-->
+      <div class="info-content">
+        <div class="info-card-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" height="100px"
+            width="100px" version="1.1" id="_x32_" viewBox="0 0 512 512" xml:space="preserve">
+            <style type="text/css">
+              .st0 {
+                fill: orchid;
+              }
+            </style>
+            <g>
+              <path class="st0"
+                d="M283.276,454.904c-4.739,3.858-9.502,6.888-14.295,9.177c-3.256,0.348-6.533,0.603-9.827,0.796v-38.201   c-7.878-6.448-15.802-13.144-23.751-20.024v58.232c-3.293-0.2-6.571-0.456-9.818-0.804c-4.794-2.289-9.564-5.32-14.303-9.177   c-15.447-12.572-29.905-33.794-40.992-61.108h50.486c-8.605-7.693-17.218-15.618-25.83-23.75h-32.959   c-3.936-13.09-7.104-27.207-9.517-42.013c-9.378-9.703-18.486-19.429-27.331-29.139c1.987,25.281,6.061,49.264,12.13,71.152H76.602   c-16.986-27.454-27.516-59.276-29.511-93.464h58.24c-6.881-7.948-13.577-15.873-20.017-23.751H47.092   c0.819-14.009,3.147-27.586,6.68-40.66c-8.064-11.001-15.626-21.84-22.599-32.456c-10.368,26.333-16.127,54.986-16.127,84.999   c0.007,128.262,103.963,232.21,232.226,232.218c30.005,0,58.658-5.759,84.982-16.119c-14.14-9.301-28.691-19.638-43.488-30.84   C286.948,451.726,285.124,453.397,283.276,454.904z M105.456,406.53c-4.067-4.067-7.933-8.335-11.636-12.734h51.158   c3.811,10.391,8.002,20.287,12.694,29.379c5.528,10.685,11.652,20.403,18.339,29.016   C149.307,442.039,125.325,426.384,105.456,406.53z" />
+              <path class="st0"
+                d="M78.442,105.348c5.072,9.084,10.839,18.548,17.187,28.296c3.17-3.68,6.386-7.314,9.826-10.754   c19.908-19.893,43.945-35.58,70.71-45.731c-12.44,15.973-22.9,35.788-31.226,58.457H96.89c5.086,7.746,10.568,15.679,16.374,23.75   h24.068c-2.188,7.878-4.067,16.074-5.76,24.454c6.363,8.18,13.02,16.452,19.947,24.787c2.498-17.458,6.007-34.042,10.585-49.242   h73.3v93.464h-45.12c7.338,7.94,14.852,15.865,22.545,23.751h22.575v22.576c7.886,7.685,15.811,15.215,23.751,22.544v-45.12h87.751   c-0.974,34.095-6.146,65.918-14.442,93.464h-17.388c11.412,9.192,22.676,17.844,33.694,25.876c0.271-0.727,0.587-1.392,0.858-2.126   h51.112c-3.711,4.399-7.569,8.667-11.636,12.734c-3.433,3.432-7.036,6.695-10.716,9.864c9.734,6.34,19.181,12.092,28.243,17.164   c44.849-42.336,72.883-102.301,72.883-168.844C479.505,136.451,375.542,32.488,247.272,32.48   C180.728,32.488,120.779,60.514,78.442,105.348z M417.956,370.046h-60.73c7.84-28.259,12.587-59.88,13.507-93.464h76.734   C445.472,310.77,434.942,342.591,417.956,370.046z M417.94,159.366c16.994,27.454,27.524,59.284,29.526,93.464h-76.811   c-0.928-33.554-5.535-65.222-13.375-93.464H417.94z M389.094,122.89c4.067,4.067,7.925,8.327,11.628,12.726H349.58   c-3.811-10.383-8.01-20.279-12.695-29.371c-5.528-10.677-11.651-20.395-18.331-29.016C345.25,87.38,369.226,103.044,389.094,122.89   z M259.154,64.534c3.301,0.201,6.58,0.456,9.834,0.804c4.794,2.281,9.548,5.312,14.288,9.169   c15.447,12.564,29.897,33.794,40.984,61.108h-65.106V64.534z M259.154,159.366h73.409c8.296,27.539,13.437,59.4,14.419,93.464   h-87.828V159.366z M211.282,74.507c4.739-3.858,9.494-6.888,14.288-9.177c3.254-0.348,6.533-0.603,9.833-0.804v71.09h-64.982   c2.621-6.472,5.374-12.718,8.35-18.47C188.312,98.652,199.538,84.102,211.282,74.507z" />
+              <path class="st0"
+                d="M503.055,424.249c-4.809-12.966-11.489-26.982-19.668-41.842c-5.59,11.149-11.929,21.872-18.981,32.062   c3.58,7.399,6.58,14.357,8.953,20.774c4.832,12.95,7.012,23.75,6.973,30.972c0,3.425-0.456,5.999-1.052,7.732   c-0.602,1.739-1.236,2.644-1.963,3.394c-0.735,0.711-1.632,1.337-3.379,1.948c-1.724,0.587-4.298,1.043-7.724,1.043   c-6.819,0.031-16.838-1.894-28.83-6.185c-12.014-4.26-26.031-10.778-41.408-19.328c-52.72-29.302-121.196-82.509-188.714-150.073   C139.698,237.229,86.491,168.752,57.181,116.024c-8.55-15.378-15.06-29.387-19.328-41.402c-4.283-11.991-6.216-22.01-6.185-28.83   c0-3.433,0.464-6.007,1.052-7.724c0.603-1.747,1.23-2.636,1.948-3.378c0.758-0.734,1.654-1.369,3.402-1.971   c1.724-0.588,4.298-1.052,7.739-1.052c7.213-0.038,18.014,2.142,30.941,6.959c6.44,2.381,13.43,5.396,20.868,8.983   c10.19-7.051,20.889-13.39,32.046-18.98c-14.891-8.204-28.938-14.891-41.927-19.7c-15.2-5.59-29-8.884-41.927-8.93   C39.662,0.008,33.662,0.781,27.91,2.722c-5.736,1.932-11.211,5.133-15.64,9.586c-4.438,4.414-7.631,9.881-9.549,15.61   C0.781,33.662,0.008,39.654,0,45.793c0.039,12.216,2.984,25.196,8.017,39.43c5.056,14.218,12.3,29.65,21.493,46.195   c31.497,56.523,86.112,126.438,155.361,195.718C254.152,396.386,324.067,451,380.582,482.498   c16.553,9.192,31.985,16.436,46.203,21.493c14.233,5.026,27.214,7.971,39.429,8.01c6.139,0,12.131-0.781,17.876-2.714   c5.721-1.924,11.187-5.11,15.609-9.548c4.454-4.438,7.654-9.912,9.58-15.633c1.94-5.752,2.714-11.752,2.721-17.89   C511.954,453.273,508.66,439.465,503.055,424.249z" />
+            </g>
+          </svg>
+        </div>
+        <div class="info-card-content">
+          <h3>Requests Growth</h3>
+          <h1 class="count-number">25000000</h1>
+          <p class="description">Managing daily website traffic exceeding 25,000,000 on media websites.</p>
+        </div>
+      </div>
+      <!-- info-card End-->
+    </div>
+  </section>
+
+  <section class="card">
+    <h2>Contact</h2>
+    <hr>
+    <div class="info-card-container">
+
+      <div class="info-content right-border right-bottom w-20">
+        <a href="mailto:Wennie1517@gmail.com" target="_blank">
+          <div class="info-card-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" width="80px" height="80px" viewBox="0 0 24 24">
+
+              <title />
+              <g id="Complete">
+                <g id="mail">
+                  <g>
+                    <polyline fill="none" points="4 8.2 12 14.1 20 8.2" stroke="#000000" stroke-linecap="round"
+                      stroke-linejoin="round" stroke-width="1" />
+                    <rect fill="none" height="14" rx="2" ry="2" stroke="#000000" stroke-linecap="round"
+                      stroke-linejoin="round" stroke-width="1" width="18" x="3" y="6.5" />
+                  </g>
+                </g>
+              </g>
+            </svg>
+          </div>
+          <div class="info-card-description">
+            <h4>wennie1517@gmail.com</h4>
+          </div>
+        </a>
+      </div>
+
+
+
+      <div class="info-content w-20">
+        <a href="https://www.facebook.com/wennie1107" target="_blank">
+          <div class="info-card-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" width="80px" height="80px" viewBox="0 0 24 24" fill="none">
+              <path fill-rule="evenodd" clip-rule="evenodd"
+                d="M2 6C2 3.79086 3.79086 2 6 2H18C20.2091 2 22 3.79086 22 6V18C22 20.2091 20.2091 22 18 22H6C3.79086 22 2 20.2091 2 18V6ZM6 4C4.89543 4 4 4.89543 4 6V18C4 19.1046 4.89543 20 6 20H12V13H11C10.4477 13 10 12.5523 10 12C10 11.4477 10.4477 11 11 11H12V9.5C12 7.567 13.567 6 15.5 6H16.1C16.6523 6 17.1 6.44772 17.1 7C17.1 7.55228 16.6523 8 16.1 8H15.5C14.6716 8 14 8.67157 14 9.5V11H16.1C16.6523 11 17.1 11.4477 17.1 12C17.1 12.5523 16.6523 13 16.1 13H14V20H18C19.1046 20 20 19.1046 20 18V6C20 4.89543 19.1046 4 18 4H6Z"
+                fill="#000000" />
+            </svg>
+          </div>
+          <div class="info-card-description">
+            <h4>Facebook</h4>
+          </div>
+        </a>
+      </div>
+
+
+    </div>
+
+    <!-- info-card End-->
+  </section>
+
+  <footer>
+    <p>All content copyright Wennie © 2023 • All rights reserved.</p>
+  </footer>
+
+  <script>
+    // 監聽 scrollDown 元素的點擊事件
+    document.getElementById("scrollDown").addEventListener("click", function () {
+      // 取得第二屏元素的 offsetTop
+      var secondScreenOffsetTop = document.getElementById("secondScreen").offsetTop;
+
+      // 使用滾動方法將頁面滾動到第二屏
+      window.scrollTo({
+        top: secondScreenOffsetTop,
+        behavior: "smooth" // 添加滑動動畫效果
+      });
+    });
+
+
+
+    function startCountAnimation(targetNumber, duration, countElement) {
+      let startNumber = 0;
+      let increment = Math.ceil(targetNumber / (duration / 16)); // 16毫秒大約是1個畫面
+
+      function updateCount() {
+        if (startNumber < targetNumber) {
+          startNumber += increment;
+          countElement.textContent = startNumber;
+          setTimeout(updateCount, 16); // 每16毫秒更新一次數字
+        } else {
+          countElement.textContent = targetNumber;
+        }
+      }
+      updateCount();
+    }
+
+    const countElements = document.querySelectorAll('.count-number');
+    const observer = new IntersectionObserver((entries, observer) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          const targetNumber = parseInt(entry.target.textContent);
+          const duration = 1500; // 動畫持續時間，以毫秒為單位
+          startCountAnimation(targetNumber, duration, entry.target);
+          observer.unobserve(entry.target); // 停止觀察已進入螢幕範圍的元素
+        }
+      });
+    });
+
+    countElements.forEach((countElement) => {
+      observer.observe(countElement);
+    });
+  </script>
+</body>
+
+</html>
